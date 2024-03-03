@@ -9,8 +9,12 @@ def vector_add(a, b):
     n = a.size  # Number of elements in the array
     out = np.empty_like(a)  # Allocate an output array
     # Define argument types and result for the C function
-    _lib.vector_add.argtypes = [ctypes.POINTER(ctypes.c_float), ctypes.POINTER(ctypes.c_float),
-                                ctypes.POINTER(ctypes.c_float), ctypes.c_int]
+    _lib.vector_add.argtypes = [
+        ctypes.POINTER(ctypes.c_float),
+        ctypes.POINTER(ctypes.c_float),
+        ctypes.POINTER(ctypes.c_float),
+        ctypes.c_int
+    ]
     # Call the CUDA vector_add function
     _lib.vector_add(
         out.ctypes.data_as(ctypes.POINTER(ctypes.c_float)),

@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #define TILE_WIDTH 16 // Define tile width for shared memory; used to break down matrices for efficient processing in blocks
 
 __global__ void MatrixMulKernel(float *d_M, float *d_N, float *d_P, int Width) {
