@@ -1,7 +1,3 @@
-extern "C" void simple_test_functionX() {
-    // Just an empty function for testing DLL export
-}
-
 extern "C" {
 
 __global__ void vector_add_kernel(float *out, const float *a, const float *b, int n) { // Kernel function
