@@ -1,0 +1,113 @@
+# Object files
+*.o
+*.obj
+*.ko
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared libraries (dynamic link library)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+*.bin
+*.cuda
+*.ptx
+*.fatbin
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel object files
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+# Backup files
+*~
+*.bak
+*.swp
+*.tmp
+
+# Other files to ignore
+*.log
+*.csv
+*.dat
+*.tlog
+*.lof
+*.lot
+*.fls
+*.out.ps
+*.nav
+*.snm
+*.toc
+*.aux
+*.idx
+*.log
+*.ind
+*.ilg
+*.dvi
+*.backup
+*.vrb
+*.tar.gz
+*.zip
+*.rar
+*.tar
+*.7z
+
+# Folders to ignore
+bin/
+build/
+.vscode/
+.idea/
+__pycache__/
+*.code-workspace
+
+# CUDA related
+*.cubin
+*.ptx
+*.fatbin
+*.cpp1.ii
+*.cpp4.ii
+*.cpp4.gpu
+*.cpp3.i
+*.cudafe1.*
+*.cudafe2.*
+*.cuda_generated_*
+nvcc_tmp_*
+
+# Ignore CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+cmake*
