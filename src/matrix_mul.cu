@@ -33,3 +33,38 @@ __global__ void MatrixMulKernel(float *d_M, float *d_N, float *d_P, int Width) {
 
     d_P[Row * Width + Col] = Pvalue; // Write the computed element to the device memory; each thread writes on element.
 }
+
+extern "C"
+void matrixMul(const float *h_A, const float *h_B, float *h_C, int width) {
+    float *d_A, *d_B, *d_P;
+    size_t size = width * width * sizeof(float);  // Size of the matrix in bytes
+
+    // Allocate memory for each matrix on the GPU
+    cudaMalloc((void **)&d_A, size);
+    cudaMalloc((void **)&d_B, size);
+    cudaMalloc((void **)&d_P, size);
+
+    // Copy the host input matrices A and B to the GPU (device)
+    cudaMemcpy(d_A, h_A, size, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_B, h_B, size, cudaMemcpyHostToDevice);
+
+    // Setup the execution configuration
+    // TILE_WIDTH should match the block size used in the kernel
+    dim3 dimBlock(TILE_WIDTH, TILE_WIDTH);
+    // Ensure there are enough blocks to cover all of the output matrix
+    dim3 dimGrid((width + TILE_WIDTH - 1) / TILE_WIDTH, (width + TILE_WIDTH - 1) / TILE_WIDTH);
+
+    // Launch the matrix multiplication kernel
+    MatrixMulKernel<<<dimGrid, dimBlock>>>(d_A, d_B, d_P, width);
+
+    // Wait for the GPU to finish
+    cudaDeviceSynchronize();
+
+    // Copy the result matrix from GPU to the host
+    cudaMemcpy(h_C, d_P, size, cudaMemcpyDeviceToHost);
+
+    // Free device memory
+    cudaFree(d_A);
+    cudaFree(d_B);
+    cudaFree(d_P);
+}

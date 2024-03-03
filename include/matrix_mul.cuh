@@ -1,8 +1,8 @@
 #ifndef MATRIX_MUL_CUH
 #define MATRIX_MUL_CUH
 
-// Kernel function decleration
-
-__global__ void MatrixMulKernel(float *d_M, float *d_N, float *d_P, int Width);
+extern "C" {
+    void matrixMul(const float *h_A, const float *h_B, float *h_C, int width);
+}
 
 #endif //MATRIX_MUL_CUH
