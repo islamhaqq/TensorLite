@@ -15,7 +15,7 @@ TensorLite is an extremely lightweight framework, inspired by TensorFlow's core 
 TensorLite is crafted for users who need a no-frills, easy-to-set-up computational framework. It's particularly suited for educational projects, small-scale experiments, or situations where the full capabilities of TensorFlow are unnecessary. To use TensorLite, follow this basic example:
 
 ```python
-from tensorlite import Tensor, add, multiply, matmul, Session
+from python.tensorlite import Tensor, add, multiply, matmul, Session
 
 # Define tensors
 a = Tensor([1, 2, 3])
