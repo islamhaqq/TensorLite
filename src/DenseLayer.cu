@@ -2,7 +2,15 @@
 
 // CUDA kernel for forward pass in dense layer
 __global__ void denseForwardKernel(float* input, float* weights, float* bias, float* output, int inputSize, int outputSize) {
-    // @TODO: CUDA code for matrix multiplication plus bias addition
+    int row = blockIdx.x * blockDim.x + threadIdx.x; // Calculate the index of the current thread
+    int col = blockIdx.y * blockDim.y + threadIdx.y;
+    if (row < outputSize && col < inputSize) { // Ensure the current thread is within the array bounds
+        float sum = 0;
+        for (int i = 0; i < inputSize; ++i) { // Perform the matrix  multiplication
+            sum += input[i] * weights[row * inputSize + i];
+        }
+        output[row] = sum + bias[row]; // Add the bias
+    }
 }
 
 __global__ void denseBackwardKernel(float* gradOutput, float* weights, float* gradInput, int inputSize, int outputSize) {
@@ -19,12 +27,14 @@ DenseLayer::DenseLayer(int inputSize, int outputSize) : inputSize(inputSize), ou
 
 void DenseLayer::forward(const Tensor &input, Tensor &output) {
     // Use the denseForwardKernel to compute the forward pass
-    // Launch the CUDA kernel @TODO: Actual arguments need to be calculated based on block and grid sizes
-    denseForwardKernel<<<1, 256>>>(input.device_data, weights->device_data, bias->device_data, output.device_data, inputSize, outputSize);
+    dim3 blockSize(16, 16);
+    dim3 gridSize((input.shape[1] + blockSize.x - 1) / blockSize.x, (weights->shape[0] + blockSize.y - 1) / blockSize.y);
+    denseForwardKernel<<<gridSize, blockSize>>>(input.device_data, weights->device_data, bias->device_data, output.device_data, inputSize, outputSize);
 }
 
 void DenseLayer::backward(const Tensor &input, Tensor &gradInput, const Tensor &gradOutput) {
     // Use the denseBackwardKernel to compute the backward pass and update gradients
-    // Launch the CUDA kernel @TODO: Actual arguments need to be calculated based on block and grid sizes
-    denseBackwardKernel<<<1, 256>>>(gradOutput.device_data, weights->device_data, gradInput.device_data, inputSize, outputSize);
+    dim3 blockSize(16, 16);
+    dim3 gridSize((input.shape[1] + blockSize.x - 1) / blockSize.x, (weights->shape[0] + blockSize.y - 1) / blockSize.y);
+    denseBackwardKernel<<<blockSize, gridSize>>>(gradOutput.device_data, weights->device_data, gradInput.device_data, inputSize, outputSize);
 }
