@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CUDA_STANDARD 14)
 
 # Add library
-add_library(TensorLite STATIC
+add_library(TensorLite SHARED
         src/vector_add.cu
         src/matrix_mul.cu
         src/TensorLite.cpp
@@ -14,6 +14,7 @@ add_library(TensorLite STATIC
 
 # Set properties for the library
 set_target_properties(TensorLite PROPERTIES
+        WINDOWS_EXPORT_ALL_SYMBOLS TRUE
         CUDA_SEPARABLE_COMPILATION ON
         POSITION_INDEPENDENT_CODE ON
         CUDA_ARCHITECTURES "60;61;70;75;80;86"
