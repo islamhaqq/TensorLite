@@ -2,7 +2,7 @@
 
 ## Overview
 
-TensorLite is an extremely lightweight framework, inspired by TensorFlow's core principles, designed for minimalistic and rapid computational needs. This streamlined version provides the essentials for tensor operations and basic computational graph functionalities, making it suitable for small-scale projects and for those seeking a more direct and less resource-intensive approach to tensor computations.
+TensorLite is a lightweight framework, inspired by TensorFlow's core principles, designed for minimalistic and rapid computational needs. This streamlined version provides the essentials for tensor operations and basic computational graph functionalities, making it suitable for small-scale projects and for those seeking a more direct and less resource-intensive approach to tensor computations.
 
 ## Features
 
