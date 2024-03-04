@@ -12,6 +12,8 @@ add_library(TensorLite SHARED
         src/vector_add.cu
         src/matrix_mul.cu
         src/TensorLite.cpp
+        src/TensorOps.cu
+        src/DenseLayer.cu
         include/TensorLite.h
 )
 
