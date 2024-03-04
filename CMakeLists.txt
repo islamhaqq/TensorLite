@@ -7,19 +7,12 @@ set(CMAKE_CUDA_STANDARD 14)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-# Include directories
-include_directories(include)
-
 # Add library
 add_library(TensorLite SHARED
         src/vector_add.cu
         src/matrix_mul.cu
         src/TensorLite.cpp
         include/TensorLite.h
-)
-
-set_target_properties(TensorLite PROPERTIES
-        WINDOWS_EXPORT_ALL_SYMBOLS TRUE
 )
 
 # Set properties for the library
@@ -29,6 +22,9 @@ set_target_properties(TensorLite PROPERTIES
         POSITION_INDEPENDENT_CODE ON
         CUDA_ARCHITECTURES "60;61;70;75;80;86"
 )
+
+# Include directories
+target_include_directories(TensorLite PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Include CUDA directories
 target_include_directories(TensorLite PUBLIC
