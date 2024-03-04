@@ -2,6 +2,7 @@ import ctypes
 import numpy as np
 
 # Load the shared library
+# @TODO: Stop using /bin and /lib as this has been removed from CMAKE
 _lib = ctypes.CDLL('../bin/TensorLite.dll')
 
 
