@@ -26,7 +26,17 @@ set_target_properties(TensorLite PROPERTIES
 # Include directories
 target_include_directories(TensorLite PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-# Include CUDA directories
-target_include_directories(TensorLite PUBLIC
-        ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}
-)
+# Log CUDA status
+if(CMAKE_CUDA_COMPILER)
+    message(STATUS "CUDA Compiler: ${CMAKE_CUDA_COMPILER}")
+else()
+    message(STATUS "CUDA Compiler not found")
+endif()
+
+# Include CUDA Toolkit directories (if found)
+if(CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES)
+    message(STATUS "CUDA Toolkit Include Directories: ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}")
+    target_include_directories(TensorLite PUBLIC ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES})
+else()
+    message(WARNING "CUDA Toolkit include directories not found.")
+endif()
