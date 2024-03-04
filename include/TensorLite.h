@@ -3,6 +3,8 @@
 
 #include <vector>
 
+extern "C" void vector_add(float *out, const float *a, const float *b, int n);
+
 // A multi-dimensional array of data
 class Tensor {
 public:
@@ -13,7 +15,7 @@ public:
     void allocateMemoryOnDevice();
     void copyDataToDevice(const std::vector<float>& data);
     void copyDataToHost(std::vector<float>& data);
-    void add(Tensor &other, Tensor &result); // @TODO: Verify if this belongs here
+    void add(Tensor &other, Tensor &result);
 
     // Attributes
     float* device_data; // Pointer to device memory

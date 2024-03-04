@@ -1,5 +1,3 @@
-extern "C" {
-
 __global__ void vector_add_kernel(float *out, const float *a, const float *b, int n) { // Kernel function
     int index = threadIdx.x + blockIdx.x * blockDim.x; // Calculate the index of the current thread
     if (index < n) { // Ensure the current thread is within the array bounds
@@ -7,7 +5,7 @@ __global__ void vector_add_kernel(float *out, const float *a, const float *b, in
     }
 }
 
-void vector_add(float *out, const float *a, const float *b, int n) {
+extern "C" void vector_add(float *out, const float *a, const float *b, int n) {
     float *d_a, *d_b,  *d_out;
     size_t size = n * sizeof(float);
 
@@ -35,6 +33,3 @@ void vector_add(float *out, const float *a, const float *b, int n) {
     cudaFree(d_b);
     cudaFree(d_out);
 }
-
-} // extern "C"
-
