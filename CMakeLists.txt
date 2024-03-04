@@ -1,8 +1,11 @@
 cmake_minimum_required(VERSION 3.28)
 project(TensorLite LANGUAGES CXX CUDA)
 
+# Set the C++ standard and output directories
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CUDA_STANDARD 14)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 # Add library
 add_library(TensorLite SHARED
