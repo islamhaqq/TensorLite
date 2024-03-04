@@ -2,7 +2,6 @@
 #define TENSORLITE_H
 
 #include <vector>
-#include <memory> // For std::unique_ptr
 
 // A multi-dimensional array of data
 class Tensor {

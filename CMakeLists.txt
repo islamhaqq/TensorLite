@@ -15,7 +15,7 @@ add_library(TensorLite SHARED
         src/vector_add.cu
         src/matrix_mul.cu
         src/TensorLite.cpp
-        src/TensorLite.h
+        include/TensorLite.h
 )
 
 set_target_properties(TensorLite PROPERTIES
