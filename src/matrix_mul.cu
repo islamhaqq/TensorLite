@@ -34,8 +34,7 @@ __global__ void MatrixMulKernel(float *d_M, float *d_N, float *d_P, int Width) {
     d_P[Row * Width + Col] = Pvalue; // Write the computed element to the device memory; each thread writes on element.
 }
 
-extern "C"
-void matrixMul(const float *h_A, const float *h_B, float *h_C, int width) {
+extern "C" void matrixMul(const float *h_A, const float *h_B, float *h_C, int width) {
     float *d_A, *d_B, *d_P;
     size_t size = width * width * sizeof(float);  // Size of the matrix in bytes
 

@@ -21,7 +21,13 @@ def add(inputs):
 
 
 def multiply(inputs):
-    return Tensor([0, 0, 0])
+    a, b = inputs
+    result = np.empty_like(a.data)
+    _lib.vector_multiply(result.ctypes.data_as(ctypes.POINTER(ctypes.c_float)),
+                         a.data.ctypes.data_as(ctypes.POINTER(ctypes.c_float)),
+                         b.data.ctypes.data_as(ctypes.POINTER(ctypes.c_float)),
+                         ctypes.c_int(a.data.size))
+    return Tensor(result)
 
 
 def matmul(inputs):

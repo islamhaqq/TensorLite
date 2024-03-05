@@ -4,7 +4,7 @@ import numpy as np
 from tensorlite import Tensor, add, multiply, matmul, Session
 
 
-class MyTestCase(unittest.TestCase):
+class TensorLiteTestCases(unittest.TestCase):
     def test_add(self):
         a = Tensor([1, 2, 3])
         b = Tensor([4, 5, 6])
